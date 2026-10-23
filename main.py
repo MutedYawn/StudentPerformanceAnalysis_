@@ -5,17 +5,17 @@ import matplotlib.pyplot as plt
 df = pd.read_csv("КІПЗс-25-3 - Основи Програмування.csv")
 df = df.dropna(subset=["Прізвище та ініціали студентів"])
 
-columns_needed = ["Прізвище та ініціали студентів", "01.10", "03.10", "05.10"]
+columns_needed = df[["09.09.2026","12.09.2026","25.09.2026","02.10.2026","09.10.2026","16.10.2026"]].to_numpy()
 df_filtered = df[columns_needed]
 
 for col in df_filtered.columns[1:]:
     df_filtered[col] = pd.to_numeric(df_filtered[col], errors="coerce")
 
-df_filtered["01.10"] = pd.to_numeric(df_filtered["01.10"], errors="coerce")
+df["середнє"] = df[["09.09.2026","12.09.2026","25.09.2026","02.10.2026","09.10.2026","16.10.2026"]].mean(axis=1)
+print(df)
+ultimate_grade = np.mean(df["середнє"], axis=0)
+print(ultimate_grade)
 
-df_clean = df_filtered.copy()
-print("--- Перші 5 рядків чистої таблиці ---")
-print(df_clean.head())
+df_max = df[["09.09.2026","12.09.2026","25.09.2026","02.10.2026","09.10.2026","16.10.2026"]].max(axis=1)
 
-print(f"\nРозмір чистої таблиці (рядки, стовпці): {df_clean.shape}")
-print("\nНазви колонок у df_clean:", list(df_clean.columns))
+print(df_max.head())
